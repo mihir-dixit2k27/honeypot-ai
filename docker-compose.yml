@@ -1,0 +1,39 @@
+version: "3.9"
+
+services:
+  cowrie:
+    image: cowrie/cowrie:latest
+    container_name: honeypot-cowrie
+    restart: unless-stopped
+    ports:
+      - "2222:2222"
+      - "2223:2223"
+    volumes:
+      - ./cowrie/etc:/cowrie/etc
+      - ./cowrie/var:/cowrie/var
+    networks:
+      - honeypot
+
+  honeypot-ai:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: honeypot-ai
+    restart: unless-stopped
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./cowrie/var:/app/cowrie/var:ro
+      - ./output:/app/output
+    environment:
+      - HONEYPOT_AI_LOG=/app/cowrie/var/log/cowrie/cowrie.json
+      - HONEYPOT_AI_GEO=true
+    command: streamlit run dashboard/app.py --server.port=8501 --server.headless=true
+    depends_on:
+      - cowrie
+    networks:
+      - honeypot
+
+networks:
+  honeypot:
+    driver: bridge
