@@ -5,7 +5,7 @@ Map command intents to MITRE ATT&CK for Enterprise technique IDs and names.
 
 Reference: https://attack.mitre.org/
 
-The mapping is intentionally pragmatic (not exhaustive) — focused on the
+The mapping is intentionally pragmatic (not exhaustive), focused on the
 commands that appear commonly in Cowrie SSH honeypot sessions.
 """
 
@@ -92,7 +92,7 @@ def build_technique_frequency(commands_df) -> dict[str, int]:
 
 def build_tactic_frequency(commands_df) -> dict[str, int]:
     """
-    Count hits per MITRE tactic (e.g. 'Discovery', 'Persistence', …).
+    Count hits per MITRE tactic (e.g. 'Discovery', 'Persistence').
     """
     freq: dict[str, int] = {}
     for intent in commands_df["intent"]:

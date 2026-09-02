@@ -4,9 +4,9 @@ cli.py
 Rich CLI entrypoint for honeypot-ai.
 
 Commands:
-    honeypot-ai analyze   — run full analysis pipeline on a cowrie.json file
-    honeypot-ai dashboard — launch the Streamlit dashboard
-    honeypot-ai report    — export Markdown + JSON report after analysis
+    honeypot-ai analyze    -- run full analysis pipeline on a cowrie.json file
+    honeypot-ai dashboard  -- launch the Streamlit dashboard
+    honeypot-ai report     -- export Markdown + JSON report after analysis
 """
 
 from __future__ import annotations
@@ -69,7 +69,6 @@ def analyze(input_path, out_dir, contamination, geo, report):
     from honeypot_ai.ingestion.cowrie_parser import parse_cowrie_log
     from honeypot_ai.ml.anomaly_detector import detect_anomalies
     from honeypot_ai.ml.threat_scorer import score_sessions
-    from honeypot_ai.intel.mitre_mapper import build_tactic_frequency
     from honeypot_ai.intel.campaign_clusterer import cluster_campaigns
 
     with Progress(SpinnerColumn(), TextColumn("[progress.description]{task.description}"),

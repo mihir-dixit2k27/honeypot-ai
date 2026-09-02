@@ -103,7 +103,7 @@ def enrich_ips(ips: list[str], timeout: int = 5) -> dict[str, dict[str, Any]]:
                 else:
                     result[ip_key] = _UNKNOWN.copy()
         except Exception as exc:  # noqa: BLE001
-            log.warning("GeoIP lookup failed (%s) — marking as Unknown", exc)
+            log.warning("GeoIP lookup failed (%s), marking as Unknown", exc)
             for ip in chunk:
                 result.setdefault(ip, _UNKNOWN.copy())
         # Be polite to the free API

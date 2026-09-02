@@ -88,7 +88,6 @@ def cluster_campaigns(
     X_num = scaler.fit_transform(X_num)
 
     # ── combine and cluster ───────────────────────────────────────────────────
-    from scipy.sparse import issparse  # noqa: PLC0415
     X = np.hstack([X_text, X_num])
 
     db = DBSCAN(eps=eps, min_samples=min_samples, metric="euclidean", n_jobs=-1)
